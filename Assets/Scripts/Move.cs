@@ -10,6 +10,7 @@ public class Move : MonoBehaviour {
     public float gravity = 9.81f;
     public SpriteRenderer spriteUnlit;
     public SpriteRenderer spriteShadow;
+    public float cold;
 
 
 	// Use this for initialization
@@ -32,7 +33,6 @@ public class Move : MonoBehaviour {
         {
             spriteUnlit.flipX = false;
             spriteShadow.flipX = false;
-
         }
 
 
@@ -48,5 +48,7 @@ public class Move : MonoBehaviour {
 
         //MOVE
         controller.Move(moveDirection * Time.deltaTime);
+
+
     }
 }
