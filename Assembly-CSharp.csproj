@@ -51,12 +51,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Move.cs" />
-     <Compile Include="Assets\PositionCamera.cs" />
      <Compile Include="Assets\Scripts\Data\Story.cs" />
      <Compile Include="Assets\Scripts\Data\StoryNode.cs" />
      <Compile Include="Assets\Scripts\EnvManager.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
+     <Compile Include="Assets\Scripts\Move.cs" />
+     <Compile Include="Assets\Scripts\PositionCamera.cs" />
      <Compile Include="Assets\Scripts\StoryManager.cs" />
      <None Include="Assets\Material\SpriteShadow - Copie.shader" />
      <None Include="Assets\Material\SpriteShadow.shader" />
