@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\Move.cs" />
      <Compile Include="Assets\Scripts\PositionCamera.cs" />
      <Compile Include="Assets\Scripts\StoryManager.cs" />
+     <Compile Include="Assets\Scripts\Utils.cs" />
      <None Include="Assets\Material\SpriteShadow - Copie.shader" />
      <None Include="Assets\Material\SpriteShadow.shader" />
  <Reference Include="UnityEngine.UIAutomation">

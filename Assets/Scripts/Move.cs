@@ -12,10 +12,19 @@ public class Move : MonoBehaviour {
     public SpriteRenderer spriteShadow;
     public float cold;
 
+    public Vector3 direction;
+
+    public Queue<float> directionAngleHistory;
+
+    public int directionAngleHistoryLimit = 10;
+
+    public float smoothDirectionAngle;
+
 
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<CharacterController>();
+        directionAngleHistory = new Queue<float>();
 	}
 	
 	// Update is called once per frame
@@ -39,16 +48,29 @@ public class Move : MonoBehaviour {
         //transform.Translate(new Vector3(h, 0f, v) * vitesse * Time.deltaTime);
 
         //DEPLACEMENT
-        var moveDirection = Vector3.zero;
-        moveDirection.Set(h, 0f, v);
-        moveDirection *= vitesse;
+        direction= Vector3.zero;
+        direction.Set(h, 0f, v);
+        direction *= vitesse;
 
         //ADD GRAVITY
-        moveDirection.y += gravity;
+        direction.y += gravity;
 
         //MOVE
-        controller.Move(moveDirection * Time.deltaTime);
+        controller.Move(direction * Time.deltaTime);
 
+        if(directionAngleHistory.Count > directionAngleHistoryLimit){
+            directionAngleHistory.Dequeue();
+        }
 
+        if(direction.x != 0 && direction.z != 0){
+            float angle = Vector2.SignedAngle(new Vector2(direction.x,direction.z),new Vector2(0,1));
+            directionAngleHistory.Enqueue(angle);
+        }
+
+        smoothDirectionAngle = Utils.GetAverage(directionAngleHistory.ToArray());
     }
+
+    
 }
+
+

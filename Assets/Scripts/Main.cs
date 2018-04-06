@@ -12,7 +12,7 @@ public class Main : MonoBehaviour {
 	private string storyName = "story";
 
 	public GameObject[] envAssets;
-	public GameObject[] players;
+	public Move[] players;
 	public Camera currentCamera;
 	public GameObject plane;
 
@@ -32,8 +32,6 @@ public class Main : MonoBehaviour {
 		Debug.Log(storyManager.GetFirstNode());
 
 		UpdateCameraBounds();
-
-		
 
 		GameObject tree = envManager.CreateAsset("Bush",new Vector3(0,0,0));
 
@@ -57,7 +55,6 @@ public class Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		UpdateCameraBounds();
-
 	}
 
 	void OnDrawGizmosSelected()
