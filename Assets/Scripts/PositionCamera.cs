@@ -16,8 +16,12 @@ public class PositionCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         var newPositionCam = faonGO.transform.position + (loupGO.transform.position - faonGO.transform.position)/2;
-        transform.position = newPositionCam;
-        
-        
-	}
+        //transform.position = newPositionCam;
+
+        var distPersos = Vector3.Distance(loupGO.transform.position, faonGO.transform.position);
+
+        transform.position = new Vector3(newPositionCam.x, Mathf.Clamp(distPersos / 3, 1, 4), newPositionCam.z - Mathf.Clamp(distPersos / 3, 0, 4));
+
+
+    }
 }
