@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4503857, g: 0.50039977, b: 0.57524955, a: 1}
+  m_IndirectSpecularColor: {r: 0.45038474, g: 0.5003991, b: 0.5752487, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -186,6 +186,50 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &218614211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 218614213}
+  - component: {fileID: 218614212}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &218614212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 218614211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b377819779fe4932a304f1f04aadc70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  envAssets: []
+  players: []
+  camera: {fileID: 1352085571}
+  plane: {fileID: 497189556}
+--- !u!4 &218614213
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 218614211}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27.853386, y: -21.12396, z: -1.6218581}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &243042304
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +486,7 @@ MonoBehaviour:
   gravity: -9.81
   spriteUnlit: {fileID: 1369870348}
   spriteShadow: {fileID: 540106778}
+  cold: 0
 --- !u!143 &534874017
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1465,6 +1510,7 @@ MonoBehaviour:
   loupGO: {fileID: 534874014}
   faonGO: {fileID: 1568622176}
   heigthCam: 0
+  cold: 10
 --- !u!1001 &1513757638
 Prefab:
   m_ObjectHideFlags: 0
@@ -1561,6 +1607,7 @@ MonoBehaviour:
   gravity: -9.81
   spriteUnlit: {fileID: 2090389304}
   spriteShadow: {fileID: 243042307}
+  cold: 0
 --- !u!4 &1568622178
 Transform:
   m_ObjectHideFlags: 0
