@@ -213,9 +213,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b377819779fe4932a304f1f04aadc70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  envAssets: []
+  envAssets:
+  - {fileID: 1226980806307020, guid: e7d92d041ba974ac0a70c99d07e00b9d, type: 2}
+  - {fileID: 1076748928130542, guid: d2764714b9b314c48b04929cd3370775, type: 2}
   players: []
-  camera: {fileID: 1352085571}
+  currentCamera: {fileID: 0}
   plane: {fileID: 497189556}
 --- !u!4 &218614213
 Transform:
