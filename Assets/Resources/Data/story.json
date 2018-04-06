@@ -1,0 +1,14 @@
+{
+    "nodes":[
+        {
+            "id":"startingTree",
+            "asset":"tree",
+            "nodes":["track1"]
+            
+        },
+        {
+                "id":"track1",
+                "asset":"track"
+        }
+    ]
+}
