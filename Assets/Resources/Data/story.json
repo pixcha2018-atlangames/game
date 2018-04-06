@@ -1,14 +1,15 @@
 {
+    "startNode":"startingTree",
     "nodes":[
         {
             "id":"startingTree",
-            "asset":"tree",
+            "assets":["tree"],
             "nodes":["track1"]
             
         },
         {
                 "id":"track1",
-                "asset":"track"
+                "asset":["track"]
         }
     ]
 }

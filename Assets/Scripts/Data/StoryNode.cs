@@ -4,10 +4,12 @@ using UnityEngine;
 public class StoryNode {
 
 	public string id;
-    public string asset;
+    public string[] assets;
     public string[] nodes;
 
-    public override string ToString(){
-        return id +" "+asset;
-    }
+     public override string ToString()
+   {
+      return base.ToString() + "[" + id +"]";
+   }
+
 }

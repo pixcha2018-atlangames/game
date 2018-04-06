@@ -5,12 +5,16 @@ using System.IO;
 
 public class Main : MonoBehaviour {
 
+	private StoryManager storyManager;
+
+	private string storyName = "story";
+
 	// Use this for initialization
 	void Start () {
-		TextAsset data = Resources.Load<TextAsset>(Path.Combine("Data","story"));
-		Debug.Log(data);
-        Story loadedData = JsonUtility.FromJson<Story>(data.text);
-		Debug.Log(loadedData);
+		storyManager = new StoryManager();
+		storyManager.Load(storyName);
+
+		Debug.Log(storyManager.GetFirstNode());
 	}
 	
 	// Update is called once per frame
