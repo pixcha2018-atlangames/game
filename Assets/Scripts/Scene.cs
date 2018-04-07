@@ -10,12 +10,16 @@ public class Scene: MonoBehaviour{
 
     public Bounds bounds;
     public Bounds visibleBounds;
+    public Bounds visible2Bounds;
 
     public SceneEvent sceneReady;
 
     public string state = "none";
 
     public bool isVisited = false;
+    public bool isView = false;
+
+    public float viewLastTime;
 
     void Start(){
         bounds = new Bounds();
@@ -33,6 +37,12 @@ public class Scene: MonoBehaviour{
             bounds.center,
             bounds.size * 0.7f
         );
+
+        visible2Bounds = new Bounds(
+            bounds.center,
+            bounds.size * 0.9f
+        );
+
         Vector3 s = bounds.size;
         s.z += 8f;
         bounds.size = s; 
