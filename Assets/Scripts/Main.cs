@@ -94,31 +94,14 @@ public class Main : MonoBehaviour {
     {
 		if(cameraLimits!=null){
 			
-			/*Gizmos.color = Color.cyan;
-
-			Vector3 dc = decor.bounds.center;
-			dc.y = 0;
-
-			Vector3 ds = decor.bounds.size;
-			ds.y = 1f;
-			
-			Gizmos.DrawCube(dc,ds);*/
+		
 
 			Gizmos.color = Color.yellow;
 			Gizmos.DrawWireCube(cameraBounds.center,cameraBounds.size);
 
-
 			Gizmos.color = Color.blue;
 
 			Ray2D ray = players[0].GetDirectionRay2D();
-			Ray r = new Ray(
-				new Vector3(ray.origin.x,0,ray.origin.y),
-				new Vector3(ray.direction.x,0,ray.direction.y)
-			);
-
-			Gizmos.color = Color.red;
-
-			Gizmos.DrawRay(r);
 
 			Bounds2D cameraBounds2D = Bounds2D.boundsXZTo2D(cameraBounds);
 

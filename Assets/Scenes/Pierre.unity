@@ -538,6 +538,7 @@ MonoBehaviour:
   faonGO: {fileID: 278208053}
   heigthCam: 0
   cold: 10
+  plane: {fileID: 497189556}
 --- !u!1 &1882025931 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1614161553266226, guid: be26571419b74b542b0832ddfbabf1f3,

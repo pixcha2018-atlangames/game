@@ -8,6 +8,7 @@ public class PositionCamera : MonoBehaviour {
     public GameObject faonGO;
     public float heigthCam;
     public float cold = 10f;
+    public GameObject plane;
     
 
 	// Use this for initialization
@@ -32,6 +33,10 @@ public class PositionCamera : MonoBehaviour {
         if (cold < 0f)
         {
            // Debug.Log("cold !");
+        }
+
+        if(plane != null){
+            plane.transform.position = new Vector3(transform.position.x,0,transform.position.z);
         }
     }
 }

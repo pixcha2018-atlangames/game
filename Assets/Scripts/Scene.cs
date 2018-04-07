@@ -9,12 +9,19 @@ public class SceneEvent : UnityEvent<Scene>
 public class Scene: MonoBehaviour{
 
     public Bounds bounds;
+    public Bounds visibleBounds;
 
     public SceneEvent sceneReady;
+
+    public string state = "none";
+
+    public bool isVisited = false;
 
     void Start(){
         bounds = new Bounds();
         UpdateBounds();
+        this.gameObject.SetActive(false);
+        state = "initialized";
         sceneReady.Invoke(this);
     }
 
@@ -22,6 +29,22 @@ public class Scene: MonoBehaviour{
         bounds.center = Vector3.zero;
         bounds.size = Vector3.zero;
         UpdateBoundsRec(transform);
+        visibleBounds = new Bounds(
+            bounds.center,
+            bounds.size * 0.7f
+        );
+        bounds.size *= 1.5f;
+    }
+
+    public bool CheckVisit(Bounds cameraBounds){
+        if(!this.isVisited){
+            this.isVisited = cameraBounds.Intersects(this.visibleBounds);
+            if(this.isVisited){
+                Debug.Log(this.name+" is visited");
+            }
+            return this.isVisited;
+        }
+        return isVisited;
     }
 
     void UpdateBoundsRec(Transform node){
@@ -33,6 +56,15 @@ public class Scene: MonoBehaviour{
         {
             UpdateBoundsRec(child);
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(bounds.center,bounds.size);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(visibleBounds.center,visibleBounds.size);
     }
 
 }
