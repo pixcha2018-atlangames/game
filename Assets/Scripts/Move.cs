@@ -213,7 +213,7 @@ public class Move : MonoBehaviour {
     }
 
     public Ray2D GetDirectionRay2D()
-    {
+    { 
         Quaternion rot = Quaternion.AngleAxis(smoothDirectionAngle, Vector3.up);
         // that's a local direction vector that points in forward direction but also 45 upwards.
         //Vector3 dir = rot * new Vector3(1,0,1);
