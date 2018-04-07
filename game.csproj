@@ -288,6 +288,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AudioPlay.cs" />
     <Compile Include="Assets\CastLight.cs" />
     <Compile Include="Assets\RapaceBehavior.cs" />
     <Compile Include="Assets\Scripts\Data\Story.cs" />
