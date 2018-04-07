@@ -28,12 +28,17 @@ public class EnvManager {
 
     private Scene currentScene;
 
+    private int sceneIndex = 0;
+
+    private GameObject[] orderScenes;
+
     public EnvManager(GameObject[] assets, Move[] players){
         this.assets = new Dictionary<string,Scene>();
         this.players = players;
         this.scenes = new List<Scene>();
         this.assetConfs = new Dictionary<string,EnvAssetConf>();
-        foreach(GameObject a in assets){
+        this.orderScenes = assets;
+        /*foreach(GameObject a in assets){
             Scene scene = a.GetComponent<Scene>();
             if(scene){
                 this.assets.Add(a.name,scene);
@@ -41,7 +46,7 @@ public class EnvManager {
                 throw new Exception("Add Scene component to '"+a.name+"' GameObject");
             }
             
-        }
+        }*/
         
     }
 
@@ -68,20 +73,27 @@ public class EnvManager {
         currentScene = null;
 
         foreach(Scene scene in this.scenes){
-            //Debug.Log(scene.state);
-            //Debug.Log(selectedPlayer);
-            if(scene.state == "ready"){
+             if(scene.state == "ready"){
                 scene.CheckVisit(cameraBounds);
                 bool overlaps = cameraBounds.Intersects(scene.bounds);
                 if(overlaps)currentScene = scene;
             }
+        }
+
+        foreach(Scene scene in this.scenes){
+            //Debug.Log(scene.state);
+            //Debug.Log(selectedPlayer);
+            
             
             allScenesVisited = allScenesVisited && scene.isVisited;
             //Debug.Log("scene allScenesVisited"+allScenesVisited);
             //Debug.Log("scene.isVisited"+scene.isVisited);
-            if(scene.state == "initialized" && selectedPlayer != null){
+            bool onBorder = currentScene==null?true:!cameraBounds.Intersects(currentScene.visibleBounds);
+            if(scene.state == "initialized" && selectedPlayer != null && onBorder){
+
+
                 Ray2D ray = selectedPlayer.GetDirectionRay2D();
-                scene.gameObject.SetActive(true);
+                
                 Bounds2D cameraBounds2D = Bounds2D.boundsXZTo2D(cameraBounds);
 
                 Vector2 p;
@@ -105,12 +117,26 @@ public class EnvManager {
 
                     Bounds2D md = Bounds2D.minkowskiDifference(currentBounds2D,Bounds2D.boundsXZTo2D(scene.bounds));
                     penetrationVector = md.closestPointOnBoundsToPoint(Vector2.zero);
+
                     scene.bounds.center += new Vector3(penetrationVector.x,0,penetrationVector.y);
                     scene.visibleBounds.center = scene.bounds.center;
                     scene.transform.position = scene.bounds.center - diff;
+
+                    bool isOk = true;
+
+                    foreach(Scene aScene in scenes){
+                        if(aScene != scene && aScene.bounds.Intersects(scene.bounds)){
+                            isOk = false;
+                            break;
+                        }
+                    }
+
+                    if(isOk){
+                        scene.state = "ready";
+                        selectedPlayer = null;
+                        scene.gameObject.SetActive(true);
+                    }
                 }
-                scene.state = "ready";
-                selectedPlayer = null;
             }
 
         }
@@ -124,23 +150,25 @@ public class EnvManager {
         }
 
         if(!lockSpawning && currentTime-lastSpawnTime > nextSpawnDelay){
-            Move[] rndPlayers = Utils.shuffle(players);
-            foreach(Move player in rndPlayers){
-                //Debug.Log(player.name+" is moving"+player.isMoving);
-                if(player.isMoving){
-                    Debug.Log("create scene ");
-                    selectedPlayer = player;
-                    string name = "Decor01";
-                    this.scenes.Add(CreateScene(name,new Vector3(0,0,0)));
-                    lockSpawning = true;
-                    break;
+            if(sceneIndex < orderScenes.Length){
+                Move[] rndPlayers = Utils.shuffle(players);
+                foreach(Move player in rndPlayers){
+                    //Debug.Log(player.name+" is moving"+player.isMoving);
+                    if(player.isMoving){
+                        Debug.Log("create scene ");
+                        selectedPlayer = player;
+                        //string name = orderScenes[sceneIndex].name;
+                        
+                        this.scenes.Add(CreateScene(orderScenes[sceneIndex],new Vector3(0,0,0)));
+                        lockSpawning = true;
+                        sceneIndex++;
+                        break;
+                    }
                 }
             }
+           
         }
 
-        
-        
-		
 	}
 /* 
     private void spawnSceneNear(string name,Move player, Bounds cameraBounds){
@@ -178,6 +206,16 @@ public class EnvManager {
             position.z
         ), Quaternion.identity);
         asset.name = assetConf.id+"["+(++assetConf.index)+"]";
+        return asset.GetComponent<Scene>();
+    }
+
+    public Scene CreateScene(GameObject obj,Vector3 position){
+
+        GameObject asset = UnityEngine.Object.Instantiate(obj, new Vector3(
+            position.x,
+            0,//UnityEngine.Random.Range(assetConf.minY,assetConf.maxY),
+            position.z
+        ), Quaternion.identity);
         return asset.GetComponent<Scene>();
     }
 }

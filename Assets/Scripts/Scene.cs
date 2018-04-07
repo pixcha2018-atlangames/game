@@ -33,7 +33,13 @@ public class Scene: MonoBehaviour{
             bounds.center,
             bounds.size * 0.7f
         );
-        bounds.size *= 1.5f;
+        Vector3 s = bounds.size;
+        s.z += 8f;
+        bounds.size = s; 
+
+       /* Vector3 c = bounds.center;
+        c.z -= 5f;
+        bounds.center = c;*/
     }
 
     public bool CheckVisit(Bounds cameraBounds){
@@ -58,7 +64,7 @@ public class Scene: MonoBehaviour{
         }
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(bounds.center,bounds.size);

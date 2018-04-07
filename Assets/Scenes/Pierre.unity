@@ -142,6 +142,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   envAssets:
   - {fileID: 1074685886643768, guid: e08550434a612481fbca40e45886a6bd, type: 2}
+  - {fileID: 1074685886643768, guid: e08550434a612481fbca40e45886a6bd, type: 2}
+  - {fileID: 1074685886643768, guid: e08550434a612481fbca40e45886a6bd, type: 2}
+  - {fileID: 1074685886643768, guid: e08550434a612481fbca40e45886a6bd, type: 2}
   players:
   - {fileID: 266401320}
   - {fileID: 1358267264}
@@ -537,8 +540,12 @@ MonoBehaviour:
   loupGO: {fileID: 1882025931}
   faonGO: {fileID: 278208053}
   heigthCam: 0
+  distPersos: 0
+  distCold: 0.6
   cold: 10
   plane: {fileID: 497189556}
+  isRapace: 0
+  rapace: {fileID: 0}
 --- !u!1 &1882025931 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1614161553266226, guid: be26571419b74b542b0832ddfbabf1f3,

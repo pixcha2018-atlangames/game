@@ -25,7 +25,7 @@ public class Move : MonoBehaviour {
     public bool isHiding;
     public bool isHappy;
     public Vector3 direction;
-    public Queue<float> directionAngleHistory;
+    public Queue<float> directionAngleHistory = new Queue<float>();
     public int directionAngleHistoryLimit = 10;
     public float smoothDirectionAngle;
     public bool isMoving;
@@ -36,7 +36,6 @@ public class Move : MonoBehaviour {
     void Start () {
         controller = GetComponent<CharacterController>();
         controller = GetComponent<CharacterController>();
-        directionAngleHistory = new Queue<float>();
         animUnlit = spriteUnlit.transform.GetComponent<Animator>();
         animShadow = spriteShadow.transform.GetComponent<Animator>();
     }
@@ -214,7 +213,7 @@ public class Move : MonoBehaviour {
 
     public Ray2D GetDirectionRay2D()
     { 
-        Quaternion rot = Quaternion.AngleAxis(smoothDirectionAngle, Vector3.up);
+        //Quaternion rot = Quaternion.AngleAxis(smoothDirectionAngle, Vector3.up);
         // that's a local direction vector that points in forward direction but also 45 upwards.
         //Vector3 dir = rot * new Vector3(1,0,1);
         Vector3 dir = new Vector3(direction.x, 0, direction.z);

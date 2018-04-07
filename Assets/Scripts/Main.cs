@@ -90,7 +90,7 @@ public class Main : MonoBehaviour {
 		Gizmos.DrawSphere(new Vector3(seg.b.x,0,seg.b.y),0.5f);
 	}
 
-	void OnDrawGizmosSelected()
+	void OnDrawGizmos()
     {
 		if(cameraLimits!=null){
 			
@@ -110,7 +110,7 @@ public class Main : MonoBehaviour {
 
 			Vector2 p;
 
-			if(Bounds2D.boundsXZTo2D(cameraBounds).intersectionWithRay2D(ray, out p)){
+			if(cameraBounds2D.intersectionWithRay2D(ray, out p)){
 				Gizmos.color = Color.black;
 				Gizmos.DrawSphere(new Vector3(p.x,0,p.y),0.25f);
 			}
