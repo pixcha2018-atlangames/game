@@ -15,9 +15,9 @@ public class RapaceBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (isRonde)
-        {
-            anim.
-        }
+        //if (isRonde)
+        //{
+           
+        //}
 	}
 }
