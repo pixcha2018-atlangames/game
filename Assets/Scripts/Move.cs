@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move : MonoBehaviour
-{
+public class Move : MonoBehaviour { 
 
     public float vitesse = 10f;
     public int playerID;
@@ -25,22 +24,16 @@ public class Move : MonoBehaviour
     public bool isLightened;
     public bool isHiding;
     public bool isHappy;
-
     public Vector3 direction;
-
     public Queue<float> directionAngleHistory;
-
     public int directionAngleHistoryLimit = 10;
-
     public float smoothDirectionAngle;
-
     public bool isMoving;
 
 
 
     // Use this for initialization
-    void Start()
-    {
+    void Start () {
         controller = GetComponent<CharacterController>();
         controller = GetComponent<CharacterController>();
         directionAngleHistory = new Queue<float>();
@@ -49,11 +42,7 @@ public class Move : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-        var h = Input.GetAxis("Horizontal" + playerID);
-        var v = Input.GetAxis("Vertical" + playerID);
+    void Update () {
 
         if (isGrelotte)
         {
@@ -115,6 +104,9 @@ public class Move : MonoBehaviour
 
             animUnlit.SetBool("Hiding", false);
             animShadow.SetBool("Hiding", false);
+
+            var h = Input.GetAxis("Horizontal" + playerID);
+            var v = Input.GetAxis("Vertical" + playerID);
 
             if (h < 0f)
             {
@@ -194,12 +186,14 @@ public class Move : MonoBehaviour
             //moveDirection.Set(h, jumpPuissance * timerJump, v);
 
             //ADD GRAVITY
-            direction.y += gravity;
+            moveDirection.y += gravity;
 
             //MOVE
-            controller.Move(direction * Time.deltaTime);
+            controller.Move(moveDirection * Time.deltaTime);
 
-            if (directionAngleHistory != null && directionAngleHistory.Count > directionAngleHistoryLimit)
+            direction = moveDirection;
+
+             if (directionAngleHistory != null && directionAngleHistory.Count > directionAngleHistoryLimit)
             {
                 directionAngleHistory.Dequeue();
             }
@@ -213,6 +207,7 @@ public class Move : MonoBehaviour
             }
 
             smoothDirectionAngle = Utils.GetAverage(directionAngleHistory.ToArray());
+
         }
 
     }
@@ -236,8 +231,4 @@ public class Move : MonoBehaviour
             new Vector2(dir.x, dir.z)
         );
     }
-
-
 }
-
-
