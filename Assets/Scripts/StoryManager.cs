@@ -9,6 +9,8 @@ public class StoryManager {
 
     private Story story;
 
+    private GameObject[] envAssets;
+
     public StoryManager(){
         nodes = new Dictionary<string,StoryNode>();
     }

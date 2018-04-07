@@ -24,19 +24,46 @@ public class Move : MonoBehaviour {
     public bool isLightened;
     public bool isHiding;
     public bool isHappy;
+    public Vector3 direction;
+    public Queue<float> directionAngleHistory = new Queue<float>();
+    public int directionAngleHistoryLimit = 10;
+    public float smoothDirectionAngle;
+    public bool isMoving;
+    public bool isFreeze;
 
 
 
     // Use this for initialization
     void Start () {
         controller = GetComponent<CharacterController>();
-        controller = GetComponent<CharacterController>();
+        directionAngleHistory = new Queue<float>();
         animUnlit = spriteUnlit.transform.GetComponent<Animator>();
         animShadow = spriteShadow.transform.GetComponent<Animator>();
+
+        if (transform.tag == "Loup")
+        {
+            animUnlit.SetTrigger("Awake");
+            animShadow.SetTrigger("Awake");
+        }
+
+        if (transform.tag == "Faon")
+        {
+            isFreeze = true;
+            animUnlit.Play("Gele",0);
+            animShadow.Play("Gele", 0);
+            animUnlit.SetBool("Gele", true);
+            animShadow.SetBool("Gele", true);
+        }
     }
 
     // Update is called once per frame
     void Update () {
+
+        if (!isFreeze)
+        {
+            animUnlit.SetBool("Gele", false);
+            animShadow.SetBool("Gele", false);
+        }
 
         if (isGrelotte)
         {
@@ -51,6 +78,7 @@ public class Move : MonoBehaviour {
         else if (Input.GetButton("Hide" + playerID))
         {
             isHiding = true;
+
             if (transform.tag == "Loup")
             {
                 if (isLightened)
@@ -91,7 +119,7 @@ public class Move : MonoBehaviour {
             }
 
         }
-        else
+        else if (!isFreeze)
         {
             animUnlit.SetBool("Grelotte", false);
             animShadow.SetBool("Grelotte", false);
@@ -142,9 +170,6 @@ public class Move : MonoBehaviour {
             //    }
             //}
 
-
-            //transform.Translate(new Vector3(h, 0f, v) * vitesse * Time.deltaTime);
-
             //JUMP
             if (Input.GetButtonDown("Jump" + playerID) && timerJump == 0f)
             {
@@ -177,19 +202,48 @@ public class Move : MonoBehaviour {
                 moveDirection.Set(h, 0f, v);
             }
 
-            //moveDirection.Set(h, jumpPuissance * timerJump, v);
-
             //ADD GRAVITY
             moveDirection.y += gravity;
 
             //MOVE
             controller.Move(moveDirection * Time.deltaTime);
 
+            direction = moveDirection;
 
+             if (directionAngleHistory != null && directionAngleHistory.Count > directionAngleHistoryLimit)
+            {
+                directionAngleHistory.Dequeue();
+            }
 
+            isMoving = direction.x != 0 || direction.z != 0;
+
+            if (isMoving)
+            {
+                float angle = Vector2.SignedAngle(new Vector2(direction.x, direction.z), new Vector2(0, 1));
+                directionAngleHistory.Enqueue(angle);
+            }
+
+            smoothDirectionAngle = Utils.GetAverage(directionAngleHistory.ToArray());
         }
+    }
 
-        
+    public Ray2D GetDirectionRay2D()
+    { 
+        //Quaternion rot = Quaternion.AngleAxis(smoothDirectionAngle, Vector3.up);
+        // that's a local direction vector that points in forward direction but also 45 upwards.
+        //Vector3 dir = rot * new Vector3(1,0,1);
+        Vector3 dir = new Vector3(direction.x, 0, direction.z);
 
+        /*float radians = smoothDirectionAngle * Mathf.Deg2Rad; 
+        Vector3 dir = new Vector3(Mathf.Cos(radians),0, Mathf.Sin(radians));
+
+        Debug.Log("smoothDirectionAngle :"+smoothDirectionAngle);
+        Debug.Log("direction :"+Vector2.SignedAngle(new Vector2(direction.x,direction.z),new Vector2(0,1)));
+        */
+
+        return new Ray2D(
+            new Vector2(transform.position.x, transform.position.z),
+            new Vector2(dir.x, dir.z)
+        );
     }
 }
