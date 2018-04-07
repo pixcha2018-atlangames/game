@@ -21,7 +21,9 @@ public class Main : MonoBehaviour {
 	private Bounds cameraBounds;
 
 	private Scene decor;
-	private Bounds md;
+	private Bounds2D md;
+
+	private Vector3 penetrationVector;
 
 	// Use this for initialization
 	void Start () {
@@ -37,24 +39,28 @@ public class Main : MonoBehaviour {
 
 		Debug.Log(storyManager.GetFirstNode());
 
-		UpdatecameraBounds();
+		UpdateCameraBounds();
 
 		decor = envManager.CreateScene("Decor01",new Vector3(0,0,0));
-		decor.UpdateBounds();
 
-		md = Utils.minkowskiDifference(cameraBounds,decor.bounds);
-		Vector3 penetrationVector = new Vector3();
+		penetrationVector = new Vector3();
 
-			
-		// find the penetration depth
-		penetrationVector = md.ClosestPoint(Vector3.zero);
-			
-		decor.bounds.center += penetrationVector;
+		decor.sceneReady.AddListener((Scene scene) => {
+			Debug.Log(scene.bounds);
+			scene.bounds.center = players[0].transform.position;
 
+			md = Bounds2D.minkowskiDifference(Bounds2D.boundsXZTo2D(cameraBounds),Bounds2D.boundsXZTo2D(decor.bounds));
+			//Vector3 penetrationVector = new Vector3();
+				
+			// find the penetration depth
+			penetrationVector = md.closestPointOnBoundsToPoint(Vector2.zero);
+				
+			scene.bounds.center += new Vector3(penetrationVector.x,0,penetrationVector.y);
+		});
 
 	}
 
-	void UpdatecameraBounds(){
+	void UpdateCameraBounds(){
 		MeshCollider collider = plane.GetComponent<MeshCollider>();
 		int i = 0;
 		for(int x = 0; x < 2;x++){
@@ -70,14 +76,14 @@ public class Main : MonoBehaviour {
 
 		cameraBounds = Utils.CreateBounds(cameraLimits);
 		Vector3 s = cameraBounds.size;
-		s.y = 10f;
+		s.y = 0.1f;
 		cameraBounds.size = s;
 
 	}
 
 	// Update is called once per frame
 	void Update () {
-		UpdatecameraBounds();
+		UpdateCameraBounds();
 		envManager.Update();
 	}
 
@@ -90,11 +96,25 @@ public class Main : MonoBehaviour {
 				Gizmos.DrawSphere(p, 1F);
 			}
 
-			Gizmos.DrawCube(cameraBounds.center,cameraBounds.size);
+			
+
+			
 			Gizmos.color = Color.cyan;
-			Gizmos.DrawCube(decor.bounds.center,decor.bounds.size);
+
+			Vector3 dc = decor.bounds.center;
+			dc.y = 0;
+
+			Vector3 ds = decor.bounds.size;
+			ds.y = 1f;
+			
+			Gizmos.DrawCube(dc,ds);
+			
+			Gizmos.color = Color.yellow;
+			Gizmos.DrawCube(cameraBounds.center,cameraBounds.size);
+
 			Gizmos.color = Color.blue;
-			Gizmos.DrawCube(md.center,md.size);
+			//Gizmos.DrawCube(md.center,md.size);
+			Gizmos.DrawSphere(penetrationVector,1f);
 		}
     }
 }

@@ -1,12 +1,21 @@
 using UnityEngine;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class SceneEvent : UnityEvent<Scene>
+{
+}
 
 public class Scene: MonoBehaviour{
 
     public Bounds bounds;
 
+    public SceneEvent sceneReady;
+
     void Start(){
         bounds = new Bounds();
         UpdateBounds();
+        sceneReady.Invoke(this);
     }
 
     public void UpdateBounds(){
