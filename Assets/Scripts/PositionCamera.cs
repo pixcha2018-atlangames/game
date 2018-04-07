@@ -31,7 +31,7 @@ public class PositionCamera : MonoBehaviour {
 
         if (cold < 0f)
         {
-            Debug.Log("cold !");
+           // Debug.Log("cold !");
         }
     }
 }

@@ -20,6 +20,8 @@ public class Move : MonoBehaviour {
 
     public float smoothDirectionAngle;
 
+    public bool isMoving;
+
 
 	// Use this for initialization
 	void Start () {
@@ -58,11 +60,13 @@ public class Move : MonoBehaviour {
         //MOVE
         controller.Move(direction * Time.deltaTime);
 
-        if(directionAngleHistory.Count > directionAngleHistoryLimit){
+        if(directionAngleHistory != null && directionAngleHistory.Count > directionAngleHistoryLimit){
             directionAngleHistory.Dequeue();
         }
 
-        if(direction.x != 0 && direction.z != 0){
+        isMoving = direction.x != 0 && direction.z != 0;
+
+        if(isMoving){
             float angle = Vector2.SignedAngle(new Vector2(direction.x,direction.z),new Vector2(0,1));
             directionAngleHistory.Enqueue(angle);
         }

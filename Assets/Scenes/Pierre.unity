@@ -144,8 +144,8 @@ MonoBehaviour:
   - {fileID: 1226980806307020, guid: e7d92d041ba974ac0a70c99d07e00b9d, type: 2}
   - {fileID: 1076748928130542, guid: d2764714b9b314c48b04929cd3370775, type: 2}
   players:
-  - {fileID: 534874014}
-  - {fileID: 1568622176}
+  - {fileID: 534874016}
+  - {fileID: 1568622177}
   currentCamera: {fileID: 1352085571}
   plane: {fileID: 497189556}
 --- !u!4 &218614213
@@ -388,6 +388,10 @@ MonoBehaviour:
   spriteUnlit: {fileID: 1369870348}
   spriteShadow: {fileID: 540106778}
   cold: 0
+  direction: {x: 0, y: 0, z: 0}
+  directionAngleHistoryLimit: 60
+  smoothDirectionAngle: 0
+  isMoving: 0
 --- !u!143 &534874017
 CharacterController:
   m_ObjectHideFlags: 0
@@ -778,6 +782,10 @@ MonoBehaviour:
   faonGO: {fileID: 1568622176}
   heigthCam: 0
   cold: 10
+  direction: {x: 0, y: 0, z: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
+  currentPosition: {x: 0, y: 0, z: 0}
+  directionAngle: 0
 --- !u!1 &1568622176
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +821,10 @@ MonoBehaviour:
   spriteUnlit: {fileID: 2090389304}
   spriteShadow: {fileID: 243042307}
   cold: 0
+  direction: {x: 0, y: 0, z: 0}
+  directionAngleHistoryLimit: 60
+  smoothDirectionAngle: 0
+  isMoving: 0
 --- !u!4 &1568622178
 Transform:
   m_ObjectHideFlags: 0

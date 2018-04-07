@@ -16,28 +16,31 @@ public class Main : MonoBehaviour {
 	public Camera currentCamera;
 	public GameObject plane;
 
-	private Vector3[] cameraBounds;
+	private Vector3[] cameraLimits;
+
+	private Bounds cameraBounds;
 
 	// Use this for initialization
 	void Start () {
 		
-		cameraBounds = new Vector3[4];
+		cameraLimits = new Vector3[4];
+		cameraBounds = new Bounds();
 
 		storyManager = new StoryManager();
 		storyManager.Load(storyName);
 
-		envManager = new EnvManager(envAssets);
+		envManager = new EnvManager(envAssets,players);
 		envManager.Load("env");
 
 		Debug.Log(storyManager.GetFirstNode());
 
-		UpdateCameraBounds();
+		UpdatecameraBounds();
 
-		GameObject tree = envManager.CreateAsset("Bush",new Vector3(0,0,0));
+		//GameObject tree = envManager.CreateAsset("Bush",new Vector3(0,0,0));
 
 	}
 
-	void UpdateCameraBounds(){
+	void UpdatecameraBounds(){
 		MeshCollider collider = plane.GetComponent<MeshCollider>();
 		int i = 0;
 		for(int x = 0; x < 2;x++){
@@ -46,25 +49,34 @@ public class Main : MonoBehaviour {
 				Ray ray = currentCamera.ViewportPointToRay(new Vector3(x, y, 0));
 				RaycastHit hit;
 				collider.Raycast(ray,out hit,100f);
-				cameraBounds[i] =  hit.point;
+				cameraLimits[i] =  hit.point;
 				i++;
 			}
 		}
+
+		cameraBounds = Utils.CreateBounds(cameraLimits);
+		Vector3 s = cameraBounds.size;
+		s.y = 10f;
+		cameraBounds.size = s;
+
 	}
 
 	// Update is called once per frame
 	void Update () {
-		UpdateCameraBounds();
+		UpdatecameraBounds();
+		envManager.Update();
 	}
 
 	void OnDrawGizmosSelected()
     {
-		if(cameraBounds!=null){
-			for(int i = 0, c=cameraBounds.Length;i<c;i++){
-				Vector3 p = cameraBounds[i];
+		if(cameraLimits!=null){
+			for(int i = 0, c=cameraLimits.Length;i<c;i++){
+				Vector3 p = cameraLimits[i];
 				Gizmos.color = Color.yellow;
 				Gizmos.DrawSphere(p, 1F);
 			}
+
+			Gizmos.DrawCube(cameraBounds.center,cameraBounds.size);
 		}
     }
 }

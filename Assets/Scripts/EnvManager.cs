@@ -11,35 +11,63 @@ public class EnvManager {
 
     private Dictionary<string,EnvAssetConf> assetConfs;
 
-    public EnvManager(GameObject[] assets){
+    public Move[] players;
+
+    private float lastSpawnTime;
+
+    private float nextSpawnDelay;
+
+    public EnvConf conf;
+
+    public EnvManager(GameObject[] assets, Move[] players){
         this.assets = new Dictionary<string,GameObject>();
+        this.players = players;
         this.assetConfs = new Dictionary<string,EnvAssetConf>();
         foreach(GameObject a in assets){
             this.assets.Add(a.name,a);
         }
+
+        
+        
     }
 
      public void Load(string name){
 
         TextAsset data = Resources.Load<TextAsset>(Path.Combine("Data",name));
 
-        EnvConf conf = JsonUtility.FromJson<EnvConf>(data.text);
+        this.conf = JsonUtility.FromJson<EnvConf>(data.text);
         foreach(EnvAssetConf c in conf.assets){
-            Debug.Log(c.id+" "+c);
             this.assetConfs.Add(c.id,c);
         }
+
+        nextSpawnDelay = Random.Range(this.conf.spawnMinDelay,this.conf.spawnMaxDelay);
+        lastSpawnTime = Time.time;
 
     }
 
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
+
+        float currentTime = Time.time;
+        if(currentTime-lastSpawnTime > nextSpawnDelay){
+            Move[] rndPlayers = Utils.shuffle(players);
+            foreach(Move player in rndPlayers){
+                if(player.isMoving){
+                    spawnNear(player);
+                    nextSpawnDelay = Random.Range(this.conf.spawnMinDelay,this.conf.spawnMaxDelay);
+                    lastSpawnTime = currentTime;
+                    break;
+                }
+            }
+        }
 		
 	}
 
-    public GameObject CreateAsset(string name,Vector3 position){
+    private void spawnNear(Move player){
+        Debug.Log("Spawn near "+player.name);
+    }
 
-        Debug.Log("CreateAsset "+name);
-        Debug.Log(this.assetConfs.ContainsKey(name));
+    public GameObject CreateAsset(string name,Vector3 position){
 
         EnvAssetConf assetConf = this.assetConfs[name];
 

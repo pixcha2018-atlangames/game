@@ -5,5 +5,7 @@ using System.Collections.Generic;
 public class EnvConf {
 
     public EnvAssetConf[] assets;
+    public float spawnMinDelay;
+    public float spawnMaxDelay;
 
 }
