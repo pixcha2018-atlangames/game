@@ -290,15 +290,24 @@
   <ItemGroup>
     <Compile Include="Assets\AudioPlay.cs" />
     <Compile Include="Assets\CastLight.cs" />
+    <Compile Include="Assets\Gele.cs" />
     <Compile Include="Assets\RapaceBehavior.cs" />
+    <Compile Include="Assets\Scripts\Data\EnvAssetConf.cs" />
+    <Compile Include="Assets\Scripts\Data\EnvConf.cs" />
     <Compile Include="Assets\Scripts\Data\Story.cs" />
     <Compile Include="Assets\Scripts\Data\StoryNode.cs" />
+    <Compile Include="Assets\Scripts\EnvManager.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\Math\Bounds2D.cs" />
+    <Compile Include="Assets\Scripts\Math\Segment2D.cs" />
+    <Compile Include="Assets\Scripts\Mink.cs" />
     <Compile Include="Assets\Scripts\Move.cs" />
     <Compile Include="Assets\Scripts\PistesBGM.cs" />
     <Compile Include="Assets\Scripts\PositionCamera.cs" />
+    <Compile Include="Assets\Scripts\Scene.cs" />
     <Compile Include="Assets\Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\StoryManager.cs" />
+    <Compile Include="Assets\Scripts\Utils.cs" />
     <Compile Include="Assets\Scripts\VolOiseau.cs" />
   </ItemGroup>
   <ItemGroup>
