@@ -66,7 +66,7 @@ public class Main : MonoBehaviour {
 				
 				Ray ray = currentCamera.ViewportPointToRay(new Vector3(x, y, 0));
 				RaycastHit hit;
-				collider.Raycast(ray,out hit,100f);
+				collider.Raycast(ray,out hit,200f);
 				cameraLimits[i] =  hit.point;
 				i++;
 			}
@@ -94,7 +94,10 @@ public class Main : MonoBehaviour {
     {
 		if(cameraLimits!=null){
 			
-		
+			foreach(Vector3 pp in cameraLimits){
+				Gizmos.color = Color.red;
+				Gizmos.DrawSphere(pp,0.5f);
+			}
 
 			Gizmos.color = Color.yellow;
 			Gizmos.DrawWireCube(cameraBounds.center,cameraBounds.size);
@@ -109,7 +112,7 @@ public class Main : MonoBehaviour {
 
 			if(Bounds2D.boundsXZTo2D(cameraBounds).intersectionWithRay2D(ray, out p)){
 				Gizmos.color = Color.black;
-				Gizmos.DrawSphere(new Vector3(p.x,0,p.y),1f);
+				Gizmos.DrawSphere(new Vector3(p.x,0,p.y),0.25f);
 			}
 
 		}

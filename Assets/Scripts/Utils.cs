@@ -36,8 +36,8 @@ public class Utils {
             return new Bounds(Vector3.zero,Vector3.zero);
         if (gos.Length == 1)
             return new Bounds(gos[0], Vector3.zero);
-        var bounds = new Bounds();
-        for (var i = 0; i < gos.Length; i++)
+        Bounds bounds = new Bounds(gos[0],Vector3.zero);
+        for (var i = 1; i < gos.Length; i++)
             bounds.Encapsulate(gos[i]); 
         return bounds;
     }
