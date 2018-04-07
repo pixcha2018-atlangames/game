@@ -29,19 +29,41 @@ public class Move : MonoBehaviour {
     public int directionAngleHistoryLimit = 10;
     public float smoothDirectionAngle;
     public bool isMoving;
+    public bool isFreeze;
 
 
 
     // Use this for initialization
     void Start () {
         controller = GetComponent<CharacterController>();
-        controller = GetComponent<CharacterController>();
+        directionAngleHistory = new Queue<float>();
         animUnlit = spriteUnlit.transform.GetComponent<Animator>();
         animShadow = spriteShadow.transform.GetComponent<Animator>();
+
+        if (transform.tag == "Loup")
+        {
+            animUnlit.SetTrigger("Awake");
+            animShadow.SetTrigger("Awake");
+        }
+
+        if (transform.tag == "Faon")
+        {
+            isFreeze = true;
+            animUnlit.Play("Gele",0);
+            animShadow.Play("Gele", 0);
+            animUnlit.SetBool("Gele", true);
+            animShadow.SetBool("Gele", true);
+        }
     }
 
     // Update is called once per frame
     void Update () {
+
+        if (!isFreeze)
+        {
+            animUnlit.SetBool("Gele", false);
+            animShadow.SetBool("Gele", false);
+        }
 
         if (isGrelotte)
         {
@@ -56,6 +78,7 @@ public class Move : MonoBehaviour {
         else if (Input.GetButton("Hide" + playerID))
         {
             isHiding = true;
+
             if (transform.tag == "Loup")
             {
                 if (isLightened)
@@ -96,7 +119,7 @@ public class Move : MonoBehaviour {
             }
 
         }
-        else
+        else if (!isFreeze)
         {
             animUnlit.SetBool("Grelotte", false);
             animShadow.SetBool("Grelotte", false);
@@ -147,9 +170,6 @@ public class Move : MonoBehaviour {
             //    }
             //}
 
-
-            //transform.Translate(new Vector3(h, 0f, v) * vitesse * Time.deltaTime);
-
             //JUMP
             if (Input.GetButtonDown("Jump" + playerID) && timerJump == 0f)
             {
@@ -182,8 +202,6 @@ public class Move : MonoBehaviour {
                 moveDirection.Set(h, 0f, v);
             }
 
-            //moveDirection.Set(h, jumpPuissance * timerJump, v);
-
             //ADD GRAVITY
             moveDirection.y += gravity;
 
@@ -206,9 +224,7 @@ public class Move : MonoBehaviour {
             }
 
             smoothDirectionAngle = Utils.GetAverage(directionAngleHistory.ToArray());
-
         }
-
     }
 
     public Ray2D GetDirectionRay2D()
