@@ -38,9 +38,10 @@ GameObject:
   - component: {fileID: 4593249575573876}
   - component: {fileID: 114399496312173074}
   - component: {fileID: 143022285875129478}
+  - component: {fileID: 136491114926288968}
   m_Layer: 0
   m_Name: Loup
-  m_TagString: Untagged
+  m_TagString: Loup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,6 +161,25 @@ MonoBehaviour:
   jumpPuissance: 12
   timerJump: 0
   coefTimerJump: 1
+  isWalking: 0
+  isGrelotte: 0
+  isRechauffe: 0
+  isLightened: 0
+  isHiding: 0
+  isHappy: 0
+--- !u!136 &136491114926288968
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614161553266226}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.15
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &143022285875129478
 CharacterController:
   m_ObjectHideFlags: 1

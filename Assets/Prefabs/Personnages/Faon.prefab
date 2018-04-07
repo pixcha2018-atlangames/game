@@ -38,9 +38,10 @@ GameObject:
   - component: {fileID: 4363410671258622}
   - component: {fileID: 114989540668615052}
   - component: {fileID: 143173391459278574}
+  - component: {fileID: 136587041331994160}
   m_Layer: 0
   m_Name: Faon
-  m_TagString: Untagged
+  m_TagString: Faon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,6 +161,25 @@ MonoBehaviour:
   jumpPuissance: 16
   timerJump: 0
   coefTimerJump: 2
+  isWalking: 0
+  isGrelotte: 0
+  isRechauffe: 0
+  isLightened: 0
+  isHiding: 0
+  isHappy: 0
+--- !u!136 &136587041331994160
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745614731104938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.14
+  m_Height: 0.61
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &143173391459278574
 CharacterController:
   m_ObjectHideFlags: 1

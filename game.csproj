@@ -288,12 +288,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CastLight.cs" />
+    <Compile Include="Assets\RapaceBehavior.cs" />
     <Compile Include="Assets\Scripts\Data\Story.cs" />
     <Compile Include="Assets\Scripts\Data\StoryNode.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\Move.cs" />
+    <Compile Include="Assets\Scripts\PistesBGM.cs" />
     <Compile Include="Assets\Scripts\PositionCamera.cs" />
+    <Compile Include="Assets\Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\StoryManager.cs" />
+    <Compile Include="Assets\Scripts\VolOiseau.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Material\SpriteShadow - Copie.shader" />
