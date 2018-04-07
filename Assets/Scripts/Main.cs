@@ -56,6 +56,8 @@ public class Main : MonoBehaviour {
 			penetrationVector = md.closestPointOnBoundsToPoint(Vector2.zero);
 				
 			scene.bounds.center += new Vector3(penetrationVector.x,0,penetrationVector.y);
+			//scene.transform.position += new Vector3(penetrationVector.x,0,penetrationVector.y);
+			//scene.UpdateBounds();
 		});
 
 	}
@@ -108,7 +110,7 @@ public class Main : MonoBehaviour {
 			ds.y = 1f;
 			
 			Gizmos.DrawCube(dc,ds);
-			
+
 			Gizmos.color = Color.yellow;
 			Gizmos.DrawCube(cameraBounds.center,cameraBounds.size);
 

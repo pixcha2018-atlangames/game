@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Data\StoryNode.cs" />
      <Compile Include="Assets\Scripts\EnvManager.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
+     <Compile Include="Assets\Scripts\Mink.cs" />
      <Compile Include="Assets\Scripts\Move.cs" />
      <Compile Include="Assets\Scripts\PositionCamera.cs" />
      <Compile Include="Assets\Scripts\Scene.cs" />

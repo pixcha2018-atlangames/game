@@ -12,27 +12,46 @@ public struct Bounds2D{
 
     public Vector2 min {
         get{
-            return center - size;
+            return center - extents;
         }
     }
 
     public Vector2 max {
         get{
-            return center + size;
+            return center + extents;
         }
+    }
+
+    public Vector2 extents{
+        get {
+            return size / 2;
+        }
+    }
+     public Bounds2D minkowskiDifference(Bounds2D other)
+    {
+        Vector2 topLeft = min - other.max;
+        Vector2 fullSize = size + other.size;
+        return new Bounds2D(topLeft + (fullSize / 2 ), fullSize);
     }
 
     public static Bounds2D minkowskiDifference(Bounds2D a, Bounds2D b)
     {
         Vector2 topLeft = a.min - b.max;
         Vector2 fullSize = a.size + b.size;
-        return new Bounds2D(topLeft + (fullSize / 2), fullSize / 2);
+        return new Bounds2D(topLeft + (fullSize / 2), fullSize);
     }
 
     public static Bounds2D boundsXZTo2D(Bounds bounds){
         return new Bounds2D(
             new Vector2(bounds.center.x,bounds.center.z),
             new Vector2(bounds.size.x,bounds.size.z)
+        );
+    }
+
+    public static Bounds2D boundsXYTo2D(Bounds bounds){
+        return new Bounds2D(
+            new Vector2(bounds.center.x,bounds.center.y),
+            new Vector2(bounds.size.x,bounds.size.y)
         );
     }
 
