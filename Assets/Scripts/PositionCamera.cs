@@ -30,7 +30,6 @@ public class PositionCamera : MonoBehaviour {
             rapace.GetComponent<RapaceBehavior>();
         }
 
-
         if (plane != null)
         {
             plane.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
@@ -87,17 +86,17 @@ public class PositionCamera : MonoBehaviour {
                 cold = 10f;
             }
 
-            if (cold < 8f && cold > 7f)
+            if (cold < 8f && cold > 7.5f)
             {
                 loupGO.GetComponent<Move>().isGrelotte = true;
                 faonGO.GetComponent<Move>().isGrelotte = true;
             }
-            else if (cold < 5f && cold > 3f)
+            else if (cold < 5f && cold > 4.2f)
             {
                 loupGO.GetComponent<Move>().isGrelotte = true;
                 faonGO.GetComponent<Move>().isGrelotte = true;
             }
-            else if (cold < 0f)
+            else if (cold < 1f)
             {
                 loupGO.GetComponent<Move>().isGrelotte = true;
                 faonGO.GetComponent<Move>().isGrelotte = true;
@@ -117,6 +116,7 @@ public class PositionCamera : MonoBehaviour {
             {
                 freezable = true;
                 faonGO.GetComponent<Move>().isFreeze = false;
+                GetComponent<AudioSource>().enabled = true;
             }
         }
     }

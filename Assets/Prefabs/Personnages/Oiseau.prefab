@@ -207,8 +207,8 @@ MonoBehaviour:
   isMoving: 0
   anim: {fileID: 0}
   distMax: 1
-  loupGO: {fileID: 0}
-  faonGO: {fileID: 0}
+  loupGO: {fileID: 1614161553266226, guid: be26571419b74b542b0832ddfbabf1f3, type: 2}
+  faonGO: {fileID: 1745614731104938, guid: 06d08c34d4577cf47bf0692f80e0f260, type: 2}
   distLoup: 0
   distFaon: 0
   isDegel: 0

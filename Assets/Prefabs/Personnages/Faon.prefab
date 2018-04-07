@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114989540668615052}
   - component: {fileID: 143173391459278574}
   - component: {fileID: 136587041331994160}
+  - component: {fileID: 114372261718219410}
   m_Layer: 0
   m_Name: Faon
   m_TagString: Faon
@@ -83,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745614731104938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.643, y: 0, z: 0.086}
+  m_LocalPosition: {x: 4.72, y: 0, z: 1.679}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 4453225406141790}
@@ -138,6 +139,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114372261718219410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745614731104938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1abcac33961c17479d493b14e12bc61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114989540668615052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,6 +179,11 @@ MonoBehaviour:
   isLightened: 0
   isHiding: 0
   isHappy: 0
+  direction: {x: 0, y: 0, z: 0}
+  directionAngleHistoryLimit: 10
+  smoothDirectionAngle: 0
+  isMoving: 0
+  isFreeze: 0
 --- !u!136 &136587041331994160
 CapsuleCollider:
   m_ObjectHideFlags: 1

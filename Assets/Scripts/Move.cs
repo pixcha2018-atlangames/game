@@ -29,7 +29,7 @@ public class Move : MonoBehaviour {
     public int directionAngleHistoryLimit = 10;
     public float smoothDirectionAngle;
     public bool isMoving;
-    public bool isFreeze;
+    public bool isFreeze = true;
 
 
 
@@ -48,7 +48,6 @@ public class Move : MonoBehaviour {
 
         if (transform.tag == "Faon")
         {
-            isFreeze = true;
             animUnlit.Play("Gele",0);
             animShadow.Play("Gele", 0);
             animUnlit.SetBool("Gele", true);
