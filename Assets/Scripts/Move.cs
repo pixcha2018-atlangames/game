@@ -131,7 +131,7 @@ public class Move : MonoBehaviour {
             directionAngleHistory.Dequeue();
         }
 
-        isMoving = direction.x != 0 && direction.z != 0;
+        isMoving = direction.x != 0 || direction.z != 0;
 
         if(isMoving){
             float angle = Vector2.SignedAngle(new Vector2(direction.x,direction.z),new Vector2(0,1));
@@ -139,6 +139,44 @@ public class Move : MonoBehaviour {
         }
 
         smoothDirectionAngle = Utils.GetAverage(directionAngleHistory.ToArray());
+    }
+
+    public Ray GetDirectionRay(){
+        Quaternion rot = Quaternion.AngleAxis(smoothDirectionAngle,Vector3.up);
+        // that's a local direction vector that points in forward direction but also 45 upwards.
+        //Vector3 dir = rot * new Vector3(1,0,1);
+        Vector3 dir = new Vector3(direction.x,0,direction.z);
+
+        /*float radians = smoothDirectionAngle * Mathf.Deg2Rad; 
+        Vector3 dir = new Vector3(Mathf.Cos(radians),0, Mathf.Sin(radians));
+
+        Debug.Log("smoothDirectionAngle :"+smoothDirectionAngle);
+        Debug.Log("direction :"+Vector2.SignedAngle(new Vector2(direction.x,direction.z),new Vector2(0,1)));
+        */
+
+        return new Ray(
+            this.transform.position,
+            dir
+        );
+    }
+
+    public Ray2D GetDirectionRay2D(){
+        Quaternion rot = Quaternion.AngleAxis(smoothDirectionAngle,Vector3.up);
+        // that's a local direction vector that points in forward direction but also 45 upwards.
+        //Vector3 dir = rot * new Vector3(1,0,1);
+        Vector3 dir = new Vector3(direction.x,0,direction.z);
+
+        /*float radians = smoothDirectionAngle * Mathf.Deg2Rad; 
+        Vector3 dir = new Vector3(Mathf.Cos(radians),0, Mathf.Sin(radians));
+
+        Debug.Log("smoothDirectionAngle :"+smoothDirectionAngle);
+        Debug.Log("direction :"+Vector2.SignedAngle(new Vector2(direction.x,direction.z),new Vector2(0,1)));
+        */
+
+        return new Ray2D(
+            new Vector2(transform.position.x,transform.position.z),
+            new Vector2(dir.x,dir.z)
+        );
     }
 
     

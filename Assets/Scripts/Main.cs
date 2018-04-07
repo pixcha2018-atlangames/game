@@ -41,24 +41,20 @@ public class Main : MonoBehaviour {
 
 		UpdateCameraBounds();
 
-		decor = envManager.CreateScene("Decor01",new Vector3(0,0,0));
+		/*decor = envManager.CreateScene("Decor01",new Vector3(0,0,0));
 
 		penetrationVector = new Vector3();
 
 		decor.sceneReady.AddListener((Scene scene) => {
-			Debug.Log(scene.bounds);
-			scene.bounds.center = players[0].transform.position;
 
+			Vector3 diff = scene.bounds.center - scene.transform.position;
+			scene.bounds.center = players[0].transform.position;
 			md = Bounds2D.minkowskiDifference(Bounds2D.boundsXZTo2D(cameraBounds),Bounds2D.boundsXZTo2D(decor.bounds));
-			//Vector3 penetrationVector = new Vector3();
-				
-			// find the penetration depth
 			penetrationVector = md.closestPointOnBoundsToPoint(Vector2.zero);
-				
 			scene.bounds.center += new Vector3(penetrationVector.x,0,penetrationVector.y);
-			//scene.transform.position += new Vector3(penetrationVector.x,0,penetrationVector.y);
-			//scene.UpdateBounds();
-		});
+			scene.transform.position = scene.bounds.center - diff;
+
+		});*/
 
 	}
 
@@ -86,22 +82,19 @@ public class Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		UpdateCameraBounds();
-		envManager.Update();
+		envManager.Update(cameraBounds);
+	}
+
+	void DrawSegment(Segment2D seg){
+		Gizmos.DrawSphere(new Vector3(seg.a.x,0,seg.a.y),0.5f);
+		Gizmos.DrawSphere(new Vector3(seg.b.x,0,seg.b.y),0.5f);
 	}
 
 	void OnDrawGizmosSelected()
     {
 		if(cameraLimits!=null){
-			for(int i = 0, c=cameraLimits.Length;i<c;i++){
-				Vector3 p = cameraLimits[i];
-				Gizmos.color = Color.yellow;
-				Gizmos.DrawSphere(p, 1F);
-			}
-
 			
-
-			
-			Gizmos.color = Color.cyan;
+			/*Gizmos.color = Color.cyan;
 
 			Vector3 dc = decor.bounds.center;
 			dc.y = 0;
@@ -109,14 +102,33 @@ public class Main : MonoBehaviour {
 			Vector3 ds = decor.bounds.size;
 			ds.y = 1f;
 			
-			Gizmos.DrawCube(dc,ds);
+			Gizmos.DrawCube(dc,ds);*/
 
 			Gizmos.color = Color.yellow;
-			Gizmos.DrawCube(cameraBounds.center,cameraBounds.size);
+			Gizmos.DrawWireCube(cameraBounds.center,cameraBounds.size);
+
 
 			Gizmos.color = Color.blue;
-			//Gizmos.DrawCube(md.center,md.size);
-			Gizmos.DrawSphere(penetrationVector,1f);
+
+			Ray2D ray = players[0].GetDirectionRay2D();
+			Ray r = new Ray(
+				new Vector3(ray.origin.x,0,ray.origin.y),
+				new Vector3(ray.direction.x,0,ray.direction.y)
+			);
+
+			Gizmos.color = Color.red;
+
+			Gizmos.DrawRay(r);
+
+			Bounds2D cameraBounds2D = Bounds2D.boundsXZTo2D(cameraBounds);
+
+			Vector2 p;
+
+			if(Bounds2D.boundsXZTo2D(cameraBounds).intersectionWithRay2D(ray, out p)){
+				Gizmos.color = Color.black;
+				Gizmos.DrawSphere(new Vector3(p.x,0,p.y),1f);
+			}
+
 		}
     }
 }

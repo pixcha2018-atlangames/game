@@ -51,13 +51,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Bounds2D.cs" />
      <Compile Include="Assets\Scripts\Data\EnvAssetConf.cs" />
      <Compile Include="Assets\Scripts\Data\EnvConf.cs" />
      <Compile Include="Assets\Scripts\Data\Story.cs" />
      <Compile Include="Assets\Scripts\Data\StoryNode.cs" />
      <Compile Include="Assets\Scripts\EnvManager.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
+     <Compile Include="Assets\Scripts\Math\Bounds2D.cs" />
+     <Compile Include="Assets\Scripts\Math\Segment2D.cs" />
      <Compile Include="Assets\Scripts\Mink.cs" />
      <Compile Include="Assets\Scripts\Move.cs" />
      <Compile Include="Assets\Scripts\PositionCamera.cs" />
