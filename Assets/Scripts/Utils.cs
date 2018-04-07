@@ -42,4 +42,11 @@ public class Utils {
         return bounds;
     }
 
+    public static Bounds minkowskiDifference(Bounds a, Bounds b)
+    {
+        Vector3 topLeft = a.min - b.max;
+        Vector3 fullSize = a.size + b.size;
+        return new Bounds(topLeft + (fullSize / 2), fullSize / 2);
+    }
+
 }

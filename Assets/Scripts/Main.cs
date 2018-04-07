@@ -21,6 +21,7 @@ public class Main : MonoBehaviour {
 	private Bounds cameraBounds;
 
 	private Scene decor;
+	private Bounds md;
 
 	// Use this for initialization
 	void Start () {
@@ -39,8 +40,17 @@ public class Main : MonoBehaviour {
 		UpdatecameraBounds();
 
 		decor = envManager.CreateScene("Decor01",new Vector3(0,0,0));
-		Renderer renderer = decor.GetComponent<Renderer>();
-		Debug.Log(renderer);
+		decor.UpdateBounds();
+
+		md = Utils.minkowskiDifference(cameraBounds,decor.bounds);
+		Vector3 penetrationVector = new Vector3();
+
+			
+		// find the penetration depth
+		penetrationVector = md.ClosestPoint(Vector3.zero);
+			
+		decor.bounds.center += penetrationVector;
+
 
 	}
 
@@ -81,7 +91,10 @@ public class Main : MonoBehaviour {
 			}
 
 			Gizmos.DrawCube(cameraBounds.center,cameraBounds.size);
+			Gizmos.color = Color.cyan;
 			Gizmos.DrawCube(decor.bounds.center,decor.bounds.size);
+			Gizmos.color = Color.blue;
+			Gizmos.DrawCube(md.center,md.size);
 		}
     }
 }
