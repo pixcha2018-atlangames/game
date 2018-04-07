@@ -49,10 +49,7 @@ public class CastLight : MonoBehaviour {
             else
             {
                 loupGO.GetComponent<Move>().isLightened = false;
-
             }
-
-
         }
         else
         {
