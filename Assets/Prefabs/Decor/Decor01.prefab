@@ -58,7 +58,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1088066520516198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,6 +1533,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27fae6b0ac2964631a3ef54e7a7b6d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  visibleBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  visible2Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  sceneReady:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: SceneEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  state: none
+  isVisited: 0
+  isView: 0
+  viewLastTime: 0
 --- !u!136 &136115121472612632
 CapsuleCollider:
   m_ObjectHideFlags: 1

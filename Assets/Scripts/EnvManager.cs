@@ -205,7 +205,9 @@ public class EnvManager
                     {
                         if (sceneIndex < orderScenes.Length)
                         {
-                            this.scenes.Add(CreateScene(orderScenes[sceneIndex], new Vector3(0, 0, 0)));
+                            Scene s = CreateScene(orderScenes[sceneIndex], new Vector3(0, 0, 0));
+                            this.scenes.Add(s);
+                             s.gameObject.SetActive(true);
                             sceneIndex++;
                         }
                     }
