@@ -20,6 +20,8 @@ public class Main : MonoBehaviour {
 
 	private Bounds cameraBounds;
 
+	private Scene decor;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -36,7 +38,9 @@ public class Main : MonoBehaviour {
 
 		UpdatecameraBounds();
 
-		//GameObject tree = envManager.CreateAsset("Bush",new Vector3(0,0,0));
+		decor = envManager.CreateScene("Decor01",new Vector3(0,0,0));
+		Renderer renderer = decor.GetComponent<Renderer>();
+		Debug.Log(renderer);
 
 	}
 
@@ -77,6 +81,7 @@ public class Main : MonoBehaviour {
 			}
 
 			Gizmos.DrawCube(cameraBounds.center,cameraBounds.size);
+			Gizmos.DrawCube(decor.bounds.center,decor.bounds.size);
 		}
     }
 }

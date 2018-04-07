@@ -141,8 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   envAssets:
-  - {fileID: 1226980806307020, guid: e7d92d041ba974ac0a70c99d07e00b9d, type: 2}
-  - {fileID: 1076748928130542, guid: d2764714b9b314c48b04929cd3370775, type: 2}
+  - {fileID: 1074685886643768, guid: e08550434a612481fbca40e45886a6bd, type: 2}
   players:
   - {fileID: 266401320}
   - {fileID: 1358267264}
