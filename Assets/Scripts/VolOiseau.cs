@@ -20,10 +20,13 @@ public class VolOiseau : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        loupGO = transform.Find("/Loup").gameObject;
+        faonGO = transform.Find("/Faon").gameObject;
+
+    }
+
+    // Update is called once per frame
+    void Update () {
         if(!isDegel)
         {
             distLoup = Vector3.Distance(transform.position, loupGO.transform.position);
