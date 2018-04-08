@@ -73,6 +73,20 @@ public class EnvManager
 
     }
 
+    public void Reset(){
+        sceneIndex = 0;
+        foreach(Scene scene in this.scenes){
+            scene.isView = false;
+            scene.isVisited = false;
+            scene.transform.parent  = null;
+            scene.gameObject.SetActive(false);
+        }
+        this.delayedScenes.Clear();
+        this.scenes.Clear();
+        this.lockSpawning = false;
+        this.currentScene = null;
+    }
+
     // Update is called once per frame
     public void Update(Bounds cameraBounds)
     {
