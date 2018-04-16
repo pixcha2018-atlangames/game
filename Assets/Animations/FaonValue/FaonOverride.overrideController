@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: FaonOverride
+  m_Controller: {fileID: 9100000, guid: a65a25b07cf1d6c46b13f6699edee1e9, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e433c16f409fcd445bac3feaaccf32e7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a35a8ccbd31f9fd49b54ca66a5925b5a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 292a9db279eb5d145b1c3001dcfaed18, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a2cfc6a3df04d554fbdfe60de136f95f, type: 2}

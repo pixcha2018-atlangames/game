@@ -20,7 +20,9 @@ public class VolOiseau : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
-	}
+        loupGO = transform.Find("/Loup").gameObject;
+        faonGO = transform.Find("/Faon").gameObject;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -29,7 +31,7 @@ public class VolOiseau : MonoBehaviour {
             distLoup = Vector3.Distance(transform.position, loupGO.transform.position);
             distFaon = Vector3.Distance(transform.position, faonGO.transform.position);
 
-            if (distFaon < distMax && distLoup < distMax && loupGO.GetComponent<Move>().isRechauffe)
+            if (distFaon < distMax && distLoup < distMax && loupGO.GetComponent<PlayerControl>().isRechauffe)
             {
                 anim.SetTrigger("Fonte");
                 isDegel = true;

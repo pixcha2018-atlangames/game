@@ -12,7 +12,7 @@ public class Main : MonoBehaviour {
 	private string storyName = "story";
 
 	public GameObject[] envAssets;
-	public Move[] players;
+	public PlayerControl[] players;
 	public Camera currentCamera;
 	public GameObject plane;
 

@@ -12,7 +12,7 @@ public class EnvManager {
 
     private Dictionary<string,EnvAssetConf> assetConfs;
 
-    public Move[] players;
+    public PlayerControl[] players;
 
     private float lastSpawnTime;
 
@@ -22,13 +22,13 @@ public class EnvManager {
 
     private List<Scene> scenes;
 
-    private Move selectedPlayer;
+    private PlayerControl selectedPlayer;
 
     private bool lockSpawning = false;
 
     private Scene currentScene;
 
-    public EnvManager(GameObject[] assets, Move[] players){
+    public EnvManager(GameObject[] assets, PlayerControl[] players){
         this.assets = new Dictionary<string,Scene>();
         this.players = players;
         this.scenes = new List<Scene>();
@@ -124,8 +124,8 @@ public class EnvManager {
         }
 
         if(!lockSpawning && currentTime-lastSpawnTime > nextSpawnDelay){
-            Move[] rndPlayers = Utils.shuffle(players);
-            foreach(Move player in rndPlayers){
+            PlayerControl[] rndPlayers = Utils.shuffle(players);
+            foreach(PlayerControl player in rndPlayers){
                 //Debug.Log(player.name+" is moving"+player.isMoving);
                 if(player.isMoving){
                     Debug.Log("create scene ");
@@ -143,7 +143,7 @@ public class EnvManager {
 		
 	}
 /* 
-    private void spawnSceneNear(string name,Move player, Bounds cameraBounds){
+    private void spawnSceneNear(string name,PlayerControl player, Bounds cameraBounds){
         Debug.Log("Spawn near "+player.name);
 		Vector3 penetrationVector = new Vector3();
 
