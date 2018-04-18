@@ -40,6 +40,16 @@ public class PlayerControl : MonoBehaviour {
     public Queue<float> directionAngleHistory;
     public int directionAngleHistoryLimit = 10;
     public float smoothDirectionAngle;
+    [Header("Empreintes")]
+    public GameObject empreinteParent;
+    public GameObject empreinte;
+    public Sprite[] empreintesPNG;
+    public float empreinteFreq;
+    public float empreinteTimer;
+    public float empreinteAngle;
+    [Header("Trou")]
+    public Sprite[] splashPNG;
+    public GameObject splashParticles;
     [Header("Jump")]
     public float jumpPuissance;
     public float timerJump;
@@ -66,6 +76,7 @@ public class PlayerControl : MonoBehaviour {
         animUnlit = spriteUnlit.transform.GetComponent<Animator>();
         anim = GetComponent<Animator>();
         gameControl = transform.Find("/GameControl").GetComponent<GameControl>();
+        empreinteTimer = empreinteFreq;
 
         if (gameControl.playTest == false)
         {
@@ -158,6 +169,20 @@ public class PlayerControl : MonoBehaviour {
                 isWalking = true;
                 animUnlit.SetBool("Walking", true);
 
+                if (timerJump == 0f)
+                {
+                    if (empreinteTimer <= 0f)
+                    {
+                        var n = Random.Range(0, empreintesPNG.Length);
+                        var newEmpreinte = Instantiate(empreinte, empreinteParent.transform);
+                        newEmpreinte.GetComponent<SpriteRenderer>().sprite = empreintesPNG[n];
+                        newEmpreinte.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                        newEmpreinte.transform.localEulerAngles = new Vector3(-90, 0f, smoothDirectionAngle-90f);
+
+                        empreinteTimer = empreinteFreq;
+                    }
+                    else empreinteTimer -= Time.deltaTime;
+                }
             }
 
             //JUMP
@@ -191,6 +216,18 @@ public class PlayerControl : MonoBehaviour {
                     moveDirection.Set(h, 0f, v);
                     timerJump = 0f;
                     anim.SetTrigger("Floored");
+
+                    var n = Random.Range(0, splashPNG.Length);
+                    var newEmpreinte = Instantiate(empreinte, empreinteParent.transform);
+                    newEmpreinte.GetComponent<SpriteRenderer>().sprite = splashPNG[n];
+                    newEmpreinte.transform.position = new Vector3(transform.position.x, Mathf.Floor(transform.position.y*10)/10+0.05f, transform.position.z);
+                    newEmpreinte.transform.localEulerAngles = new Vector3(-90, 0f, 0f);
+
+                    var newSplash = Instantiate(splashParticles, empreinteParent.transform);
+                    newSplash.transform.position = new Vector3(transform.position.x, Mathf.Floor(transform.position.y * 10) / 10 + 0.05f, transform.position.z);
+
+
+
                 }
             }
             else
